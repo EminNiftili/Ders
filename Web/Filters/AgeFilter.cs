@@ -13,12 +13,21 @@ namespace Web.Filters
             if(context.HttpContext.Request.Headers.TryGetValue("Age", out var ageString) 
                 && int.TryParse(ageString, out var age))
             {
-                if(age < 18)
+                if(age <= 18)
                 {
                     context.Result = new Microsoft.AspNetCore.Mvc.ContentResult
                     {
                         StatusCode = 403,
                         Content = "Access denied. You must be at least 18 years old."
+                    };
+                }
+
+                if (age > 30)
+                {
+                    context.Result = new Microsoft.AspNetCore.Mvc.ContentResult
+                    {
+                        StatusCode = 403,
+                        Content = "Access denied. You must be at higher 30 years old."
                     };
                 }
             }
