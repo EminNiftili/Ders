@@ -1,4 +1,5 @@
 ﻿
+Console.WriteLine("Hello, World!");
 //if (person == null)
 //{
 //    Console.WriteLine("Musteri tapilmadi");
