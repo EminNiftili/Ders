@@ -1,0 +1,37 @@
+﻿@using Web.Models.TestMvc
+@model IndexViewModel
+
+
+<div>
+    <h6>Bura TestMVC Index sehifesidir</h6>
+</div>
+
+<div>
+    <label> Musterinin adi: @Model.Person.Name </label>
+
+    <br />
+
+    <label> Musterinin soy adi: @Model.Person.Surname </label>
+
+    <br />
+
+    <label> Müştəri Email unvani: @Model.Person.Email </label>
+
+    <br />
+    @for(int i = 0; i< Model.Person.Mobiles.Count(); i++)
+    {
+        <label> Musterinin @(i + 1).ci nomresi: @Model.Person.Mobiles.ElementAt(i).Number </label>
+        <br />
+    }
+    @if(Model.Lessons != null && Model.Lessons.Count > 0)
+    {
+        <h1> Asagida movcud IXTISASLAR qeyd olunub</h1>
+        <select>
+            @for (int i = 0; i < Model.Lessons.Count; i++)
+            {
+                <option value="@Model.Lessons[i].Id"> @Model.Lessons[i].SpecialtyName  (@Model.Lessons[i].FacultyName)</option>
+            }
+        </select>
+    }
+    
+</div>

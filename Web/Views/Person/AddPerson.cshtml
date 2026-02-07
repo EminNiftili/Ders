@@ -1,0 +1,60 @@
+﻿@using Web.Models.Person
+
+@model AddPersonViewModel
+
+<h2> Yeni insan əlavə etmək üçün məlumatları doldurun</h2>
+@if (Model.Errors.Any())
+{
+    <div class=" card p-2">
+
+        @foreach (var error in Model.Errors)
+        {
+            <div class="alert alert-danger" role="alert">
+                 @error
+            </div>
+        }
+    </div>
+}
+
+<form action="AddPersonData" method="post">
+    <div class="card p-2">
+        <div class="row">
+            <div class="input-group align-content-center">
+                <span class="input-group-text">Adı və soyadı</span>
+                <input required value="@(Model.Person?.Name ?? "")" name="Name" type="text" aria-label="First name" class="form-control">
+                <input required value="@(Model.Person?.Surname ?? "")" name="Surname" type="text" aria-label="Last name" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group mb-3 align-content-center">
+              <input required value="@(Model.Person?.EmailAdress ?? "")" name="EmailAdress" type="text" class="form-control" placeholder="Username" aria-label="Username">
+              <span class="input-group-text">@@</span>
+              <input required value="@(Model.Person?.EmailServer ?? "")" name="EmailServer" type="text" class="form-control" placeholder="Server" aria-label="Server">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <label for="inputAge" class="visually-hidden">Yaşı</label>
+                <input required value="@(Model.Person?.Age ?? 0)" name="Age" type="number" class="form-control" id="inputAge" placeholder="Age">
+            </div>
+            <div class="col-4">
+                <label for="inputSalary" class="visually-hidden">Aldığı əmək haqqı</label>
+                <input required value="@(Model.Person?.Salary ?? 0)" name="Salary" type="number" class="form-control" id="inputSalary" placeholder="Salary">
+            </div>
+
+            <div class="col-4">
+                <label for="inputPass" class="visually-hidden">Şifrə</label>
+                <input required name="Password" type="text" class="form-control" id="inputPass" placeholder="Parol">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">
+                    Əlavə et
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

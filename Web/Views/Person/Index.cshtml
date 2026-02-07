@@ -1,0 +1,88 @@
+﻿@using Web.Models.Person
+
+@model IndexViewModel
+
+
+@if(Model.People != null && Model.People.Count > 0)
+{
+    <div class="row">
+        <div class="col-8">
+            <h3>Insanların siyahısı</h3>
+        </div>
+        <div class="col-4">
+            <a class="btn btn-primary" asp-action="AddPerson"> Əlavə et </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <td>
+                    Sıra nömrəsi
+                </td>
+                <td>
+                    Ad
+                </td>
+                <td>
+                    Soyad
+                </td>
+                <td>
+                    Email
+                </td>
+                <td>
+                    Yaşı
+                </td>
+                <td>
+                    Aldığı maaş
+                </td>
+                <td>
+                    Əməliyyatlar
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var person in Model.People)
+            {
+                <tr>
+                    <td>
+                        @person.Id
+                    </td>
+                    <td>
+                        @person.Name
+                    </td>
+                    <td>
+                        @person.Surname
+                    </td>
+                    <td>
+                        @person.Email
+                    </td>
+                    <td>
+                        @person.Age
+                    </td>
+                    <td>
+                        @person.Salary
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info"> Detalli bax </button>
+                        <button type="button" class="btn btn-info"> Derslerine bax </button>
+                        @{
+                            var deleteClaim = this.User.Claims.FirstOrDefault(x => x.Type == "canDeleteUser");
+                            bool.TryParse(deleteClaim.Value, out var canDelete);
+                        }
+                        @if (canDelete)
+                        {
+                            <a href="@(Url.Action("DeletePerson", "Person"))?id=@person.Id" class="btn btn-danger"> Sil</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>
+        Sizin məlumat bazasında heç bir insan əlavə edilməyib. Əlavə etmək üçün <a asp-action="AddPerson"> klikləyin </a>
+    </h1>
+}
